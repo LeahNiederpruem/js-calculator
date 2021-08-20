@@ -11,32 +11,34 @@
   <body>
     <div class="mainWrapper">
       <div class="windowWrapper">
-        <div class="inputWrapper">
-          <input class="inputWindow" type="text" />
-        </div>
-        <!-- <div class="operatorWrapper">
-          <div class="operatorTop">
-            <button class="placeholder">+</button>
-            <button class="placeholder">-</button>
-            <button class="placeholder">*</button>
-            <button class="placeholder">/</button>
-          </div>
-        </div> -->
+        <input class="inputWindow" type="number" value="0" />
         <div class="numpadWrapper">
           <div class="topNumpad">
-            <button class="placeholder">7</button>
-            <button class="placeholder">8</button>
-            <button class="placeholder">9</button>
-            <button class="placeholder">4</button>
-            <button class="placeholder">5</button>
-            <button class="placeholder">6</button>
-            <button class="placeholder">1</button>
-            <button class="placeholder">2</button>
-            <button class="placeholder">3</button>
+            <button class="buttons" id="button-black">C</button>
+            <button class="buttons" id="button-black">%</button>
+            <button class="buttons" id="button-black">DEL</button>
+            <button class="buttons" id="button-black">/</button>
           </div>
           <div class="bottomNumpad">
-            <button class="placeholder">0</button>
-            <button class="placeholder">,</button>
+            <div class="numbers">
+              <button class="buttons">7</button>
+              <button class="buttons">8</button>
+              <button class="buttons">9</button>
+              <button class="buttons">4</button>
+              <button class="buttons">5</button>
+              <button class="buttons">6</button>
+              <button class="buttons">1</button>
+              <button class="buttons">2</button>
+              <button class="buttons">3</button>
+              <button class="buttons" id="button-wide">0</button>
+              <button class="buttons">,</button>
+            </div>
+            <div class="operators">
+              <button class="buttons" id="button-black">x</button>
+              <button class="buttons" id="button-black">-</button>
+              <button class="buttons" id="button-black">+</button>
+              <button class="buttons" id="button-black">=</button>
+            </div>
           </div>
         </div>
       </div>
