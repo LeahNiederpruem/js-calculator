@@ -15,39 +15,45 @@
 
 .windowWrapper {
   width: auto;
-  height: 480px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
     0 15px 40px rgba(166, 173, 201, 0.2);
-  border: solid 1px white;
+  border: solid 1px hsl(0, 0%, 90%);
 }
 
-.inputWindowWrap {
-  height: 80px;
+.topWrapper {
+  height: 100px;
   width: 100%;
   background-color: hsl(0, 0%, 95%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.inputNumber {
+  padding: 0px 10px;
+  font-size: 2.3rem;
+}
+
+.liveNumber {
+  padding: 0px 10px;
+  opacity: 45%;
 }
 
 .inputWindow {
-  height: 80px;
+  height: 60%;
   width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
   direction: rtl;
   background-color: hsl(0, 0%, 95%);
   border: none;
 }
 
-/* .inputWindow {
-  height: 80px;
-  padding: 0px 30px;
-  width: 100%;
-  background-color: hsl(0, 0%, 95%);
-  border: none;
-  border-bottom: solid 1px white;
-  direction: rtl;
-} */
-
 .numpadWrapper {
+  border-top: solid 1px hsl(0, 0%, 90%);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -74,7 +80,7 @@
   align-content: flex-start;
 }
 
-.buttons {
+.calcButton {
   height: 80px;
   width: 80px;
   border: none;
@@ -86,18 +92,17 @@
   transition: all 0.1s;
 }
 
-.buttons:hover {
+.calcButton:hover {
   transition: all 0.1s;
-  background-color: hsl(0, 0%, 95%);
+  background-color: hsl(0, 0%, 90%) !important;
 }
 
-.buttons:active {
-  background-color: hsl(0, 0%, 90%) !important;
+.calcButton:active {
+  background-color: hsl(0, 0%, 85%) !important;
   font-size: 18px;
 }
 
-#button-black {
-  color: black;
+#button-side {
   background-color: hsl(0, 0%, 95%);
 }
 
