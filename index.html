@@ -5,44 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
-    <script src="script.js" async defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="mainWrapper">
       <div class="windowWrapper">
           <div class="topWrapper">
-              <!-- <input class="inputWindow" type="number" value="0" /> -->
-              <p class="inputNumber">0</p>
-              <p class="liveNumber">0</p>
+              <div class="inputNumber">0</div>
+              <!-- <div class="liveOperation">0</div> -->
           </div>
         
         <div class="numpadWrapper">
           <div class="topNumpad">
-            <button class="calcButton" id="button-side" data-calc-char="trash">C</button>
-            <button class="calcButton" id="button-side" data-calc-char="percent">%</button>
-            <button class="calcButton" id="button-side" data-calc-char="delete">DEL</button>
-            <button class="calcButton" id="button-side" data-calc-char="divide">/</button>
+            <button class="calcButton" id="button-side" data-clear>CA</button>
+            <button class="calcButton" id="button-side" data-operation>%</button>
+            <button class="calcButton" id="button-side" data-delete>⌫</button>
+            <button class="calcButton" id="button-side" data-operation>÷</button>
           </div>
           <div class="bottomNumpad">
             <div class="numbers">
-              <button class="calcButton" data-calc-char="7">7</button>
-              <button class="calcButton" data-calc-char="8">8</button>
-              <button class="calcButton" data-calc-char="9">9</button>
-              <button class="calcButton" data-calc-char="4">4</button>
-              <button class="calcButton" data-calc-char="5">5</button>
-              <button class="calcButton" data-calc-char="6">6</button>
-              <button class="calcButton" data-calc-char="1">1</button>
-              <button class="calcButton" data-calc-char="2">2</button>
-              <button class="calcButton" data-calc-char="3">3</button>
-              <button class="calcButton" id="button-wide" data-calc-char="0">0</button>
-              <button class="calcButton" data-calc-char="comma">,</button>
+              <button class="calcButton" data-number>9</button>
+              <button class="calcButton" data-number>8</button>
+              <button class="calcButton" data-number>7</button>
+              <button class="calcButton" data-number>6</button>
+              <button class="calcButton" data-number>5</button>
+              <button class="calcButton" data-number>4</button>
+              <button class="calcButton" data-number>3</button>
+              <button class="calcButton" data-number>2</button>
+              <button class="calcButton" data-number>1</button>
+              <button class="calcButton" data-number>,</button>
+              <button class="calcButton" id="button-wide" data-number>0</button>
             </div>
             <div class="operators">
-              <button class="calcButton" id="button-side" data-calc-char="multiply">x</button>
-              <button class="calcButton" id="button-side" data-calc-char="subtract">-</button>
-              <button class="calcButton" id="button-side" data-calc-char="add">+</button>
-              <button class="calcButton" id="button-side" data-calc-char="equals">=</button>
+              <button class="calcButton" id="button-side" data-operation>⨉</button>
+              <button class="calcButton" id="button-side" data-operation>-</button>
+              <button class="calcButton" id="button-side" data-operation>+</button>
+              <button class="calcButton" id="button-side" data-equals>=</button>
             </div>
           </div>
         </div>
