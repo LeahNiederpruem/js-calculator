@@ -6,7 +6,25 @@ const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const inputNumberField = document.querySelector(".inputNumber");
 
-let inputNumber = inputNumberField.innerHTML;
+const regex = /\d/gm;
+
+let currentNumber = inputNumberField.innerHTML;
+
+let inputNumber1 = undefined;
+let inputNumber2 = undefined;
+let selectedOperator = undefined;
+
+document.body.onkeydown = (e) => {
+  if(e.key == 'Backspace'){
+    deleteNumber()
+  } else if (e.key.toLowerCase() == 'c'){
+    clearAll()
+  } else if (e.key == ','){
+    checkInput(e.key)
+  } else if(isNumber(e.key)){
+    checkInput(e.key)
+  }
+};
 
 numberButtons.forEach((button) => {
   button.onclick = () => {
@@ -16,7 +34,23 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
   button.onclick = () => {
-    console.log(button);
+    // console.log(button);
+    if (selectedOperator === undefined) {
+      switch (button.innerText) {
+        case "+":
+          selectedOperator = "+";
+          break;
+        case "-":
+          selectedOperator = "-";
+          break;
+        case "⨉":
+          selectedOperator = "*";
+          break;
+        case "÷":
+          selectedOperator = "/";
+          break;
+      }
+    }
   };
 });
 
@@ -54,14 +88,24 @@ const updateDisplay = (input) => {
 
 const appendNumber = (input) => {
   inputNumberField.innerText += input;
+  setCurrentNumber();
 };
 
 const replaceNumber = (input) => {
   inputNumberField.innerText = input;
+  setCurrentNumber();
+};
+
+const setCurrentNumber = () => {
+  currentNumber = inputNumberField.innerText;
+  console.log(currentNumber);
 };
 
 const clearAll = () => {
   inputNumberField.innerText = 0;
+  inputNumber1 == undefined;
+  inputNumber2 == undefined;
+  selectedOperator == undefined;
 };
 
 const deleteNumber = () => {
@@ -70,3 +114,13 @@ const deleteNumber = () => {
     inputNumberField.innerText = 0;
   }
 };
+
+const isNumber = (input) => {
+  let match = input.match(regex)
+  if(match){
+    return true
+  }
+
+  return false
+  // console.log(match)
+}
