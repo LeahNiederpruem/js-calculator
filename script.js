@@ -5,6 +5,7 @@ const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const inputNumberField = document.querySelector(".inputNumber");
+const saveInput = document.querySelector(".saveInput");
 
 const regex = /\d/gm;
 
@@ -15,14 +16,32 @@ let inputNumber2 = undefined;
 let selectedOperator = undefined;
 
 document.body.onkeydown = (e) => {
-  if(e.key == 'Backspace'){
-    deleteNumber()
-  } else if (e.key.toLowerCase() == 'c'){
-    clearAll()
-  } else if (e.key == ','){
-    checkInput(e.key)
-  } else if(isNumber(e.key)){
-    checkInput(e.key)
+  switch (e.key) {
+    case "+":
+      setOperator("+");
+      break;
+    case "-":
+      setOperator("-");
+      break;
+    case "*":
+      setOperator("*");
+      break;
+    case "/":
+      setOperator("/");
+      break;
+    case "Enter":
+      doMath();
+      break;
+  }
+
+  if (e.key == "Backspace") {
+    deleteNumber();
+  } else if (e.key.toLowerCase() == "c") {
+    clearAll();
+  } else if (e.key == ",") {
+    checkInput(e.key);
+  } else if (isNumber(e.key)) {
+    checkInput(e.key);
   }
 };
 
@@ -34,22 +53,19 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
   button.onclick = () => {
-    // console.log(button);
-    if (selectedOperator === undefined) {
-      switch (button.innerText) {
-        case "+":
-          selectedOperator = "+";
-          break;
-        case "-":
-          selectedOperator = "-";
-          break;
-        case "⨉":
-          selectedOperator = "*";
-          break;
-        case "÷":
-          selectedOperator = "/";
-          break;
-      }
+    switch (button.innerText) {
+      case "+":
+        setOperator("+");
+        break;
+      case "-":
+        setOperator("-");
+        break;
+      case "⨉":
+        setOperator("*");
+        break;
+      case "÷":
+        setOperator("/");
+        break;
     }
   };
 });
@@ -96,6 +112,26 @@ const replaceNumber = (input) => {
   setCurrentNumber();
 };
 
+const setOperator = (operator) => {
+  selectedOperator = operator;
+  updateSaveInput();
+};
+
+const updateSaveInput = () => {
+  saveInput.innerText = inputNumberField.innerText + selectedOperator;
+  inputNumberField.innerText = 0;
+};
+
+//temp name
+const doMath = () => {
+  console.log('test')
+  calculation = (saveInput.innerText, inputNumberField.innerText);
+
+  inputNumberField.innerText = calculation;
+
+  console.log(calculation)
+};
+
 const setCurrentNumber = () => {
   currentNumber = inputNumberField.innerText;
   console.log(currentNumber);
@@ -103,6 +139,7 @@ const setCurrentNumber = () => {
 
 const clearAll = () => {
   inputNumberField.innerText = 0;
+  saveInput.innerText = 0;
   inputNumber1 == undefined;
   inputNumber2 == undefined;
   selectedOperator == undefined;
@@ -116,11 +153,7 @@ const deleteNumber = () => {
 };
 
 const isNumber = (input) => {
-  let match = input.match(regex)
-  if(match){
-    return true
+  if (input.match(regex)) {
+    return true;
   }
-
-  return false
-  // console.log(match)
-}
+};
