@@ -36,7 +36,7 @@ document.body.onkeydown = (e) => {
     deleteNumber();
   } else if (e.key.toLowerCase() == "c") {
     clearAll();
-  } else if (e.key == ",") {
+  } else if (e.key == ".") {
     checkInput(e.key);
   } else if (isNumber(e.code)) {
     checkInput(e.key);
@@ -83,11 +83,11 @@ deleteButton.onclick = () => {
 const checkInput = (input) => {
   if (inputNumberField.innerText == 0 && input == 0) {
     return;
-  } else if (inputNumberField.innerText.includes(",") && input == ",") {
+  } else if (inputNumberField.innerText.includes(".") && input == ".") {
     return;
   } else if (inputNumberField.innerText == 0 && input != 0) {
     updateDisplay(input);
-  } else if (inputNumberField.innerText == 0 && input == ",") {
+  } else if (inputNumberField.innerText == 0 && input == ".") {
     updateDisplay(input);
   } else {
     updateDisplay(input);
@@ -95,7 +95,7 @@ const checkInput = (input) => {
 };
 
 const updateDisplay = (input) => {
-  if (inputNumberField.innerText == 0 && input == ",") {
+  if (inputNumberField.innerText == 0 && input == ".") {
     appendNumber(input);
   } else if (inputNumberField.innerText == 0 && input != 0) {
     replaceNumber(input);
@@ -154,19 +154,19 @@ const doMath = () => {
 };
 
 const calcAddition = (num1, num2) => {
-  return num1 + num2;
+  return parseFloat(num1 + num2).toFixed(2);
 };
 
 const calcSubtraction = (num1, num2) => {
-  return num1 - num2;
+  return parseFloat(num1 - num2).toFixed(2);
 };
 
 const calcMutliplication = (num1, num2) => {
-  return num1 * num2;
+  return parseFloat(num1 * num2).toFixed(2);
 };
 
 const calcDivision = (num1, num2) => {
-  return num1 / num2;
+  return parseFloat(num1 / num2).toFixed(2);
 };
 
 const setCurrentNumber = () => {
