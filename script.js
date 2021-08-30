@@ -5,7 +5,6 @@ const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const inputNumberField = document.querySelector(".inputNumber");
-const bottomInput = document.querySelector(".bottomInput");
 
 let currentNumber = inputNumberField.innerHTML;
 
