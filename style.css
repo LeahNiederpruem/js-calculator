@@ -27,9 +27,13 @@
   background-color: hsl(0, 0%, 0%);
   color: white;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.operatorDisplay {
+  opacity: 50%;
 }
 
 .inputNumber {
