@@ -28,7 +28,7 @@ document.body.onkeydown = (e) => {
       setOperator("/");
       break;
     case "Enter":
-      doMath();
+      calculate();
       break;
   }
 
@@ -73,7 +73,7 @@ clearButton.onclick = () => {
 };
 
 equalsButton.onclick = () => {
-  doMath();
+  calculate();
 };
 
 deleteButton.onclick = () => {
@@ -124,7 +124,7 @@ const updateBottomInput = () => {
   inputNumberField.innerText = 0;
 };
 
-const doMath = () => {
+const calculate = () => {
   switch (selectedOperator) {
     case "+":
       bottomInput.innerText = calcAddition(
