@@ -5,9 +5,7 @@ const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const inputNumberField = document.querySelector(".inputNumber");
-const saveInput = document.querySelector(".saveInput");
-
-const regex = /\d/gm;
+const bottomInput = document.querySelector(".bottomInput");
 
 let currentNumber = inputNumberField.innerHTML;
 
@@ -40,7 +38,7 @@ document.body.onkeydown = (e) => {
     clearAll();
   } else if (e.key == ",") {
     checkInput(e.key);
-  } else if (isNumber(e.key)) {
+  } else if (isNumber(e.code)) {
     checkInput(e.key);
   }
 };
@@ -72,6 +70,10 @@ operationButtons.forEach((button) => {
 
 clearButton.onclick = () => {
   clearAll();
+};
+
+equalsButton.onclick = () => {
+  doMath();
 };
 
 deleteButton.onclick = () => {
@@ -114,22 +116,57 @@ const replaceNumber = (input) => {
 
 const setOperator = (operator) => {
   selectedOperator = operator;
-  updateSaveInput();
+  updateBottomInput();
 };
 
-const updateSaveInput = () => {
-  saveInput.innerText = inputNumberField.innerText + selectedOperator;
+const updateBottomInput = () => {
+  bottomInput.innerText = inputNumberField.innerText;
   inputNumberField.innerText = 0;
 };
 
-//temp name
 const doMath = () => {
-  console.log('test')
-  calculation = (saveInput.innerText, inputNumberField.innerText);
+  switch (selectedOperator) {
+    case "+":
+      bottomInput.innerText = calcAddition(
+        parseFloat(inputNumberField.innerText),
+        parseFloat(bottomInput.innerText)
+      );
+      break;
+    case "-":
+      bottomInput.innerText = calcSubtraction(
+        parseFloat(inputNumberField.innerText),
+        parseFloat(bottomInput.innerText)
+      );
+      break;
+    case "*":
+      bottomInput.innerText = calcMutliplication(
+        parseFloat(inputNumberField.innerText),
+        parseFloat(bottomInput.innerText)
+      );
+      break;
+    case "/":
+      bottomInput.innerText = calcDivision(
+        parseFloat(inputNumberField.innerText),
+        parseFloat(bottomInput.innerText)
+      );
+      break;
+  }
+};
 
-  inputNumberField.innerText = calculation;
+const calcAddition = (num1, num2) => {
+  return num1 + num2;
+};
 
-  console.log(calculation)
+const calcSubtraction = (num1, num2) => {
+  return num1 - num2;
+};
+
+const calcMutliplication = (num1, num2) => {
+  return num1 * num2;
+};
+
+const calcDivision = (num1, num2) => {
+  return num1 / num2;
 };
 
 const setCurrentNumber = () => {
@@ -139,7 +176,7 @@ const setCurrentNumber = () => {
 
 const clearAll = () => {
   inputNumberField.innerText = 0;
-  saveInput.innerText = 0;
+  bottomInput.innerText = 0;
   inputNumber1 == undefined;
   inputNumber2 == undefined;
   selectedOperator == undefined;
@@ -153,7 +190,7 @@ const deleteNumber = () => {
 };
 
 const isNumber = (input) => {
-  if (input.match(regex)) {
+  if (input.includes("Digit")) {
     return true;
   }
 };
