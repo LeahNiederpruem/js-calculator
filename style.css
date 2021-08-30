@@ -37,9 +37,11 @@
   font-size: 2.3rem;
 }
 
-.saveInput {
+.bottomNumber {
   padding: 0px 10px;
   opacity: 45%;
+  display: flex;
+  gap: 3px;
 }
 
 
