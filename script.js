@@ -27,10 +27,6 @@ equalsButton.onclick = () => {
 numberButtons.forEach((button) => {
   button.onclick = () => {
     checkInput(button.innerText);
-    console.log('-----------------------')
-    console.log('savedInputNumber', savedInputNumber)
-    console.log('currentNumber', currentNumber)
-    console.log('resultNumber', resultNumber)
   };
 });
 
@@ -41,8 +37,8 @@ operationButtons.forEach((button) => {
 });
 
 const checkInput = (input) => {
-  if(input == '.'){
-    return checkComma(input)
+  if (input == ".") {
+    return checkComma(input);
   }
 
   if (savedInputNumber == currentNumber) {
@@ -50,7 +46,7 @@ const checkInput = (input) => {
   } else if (inputNumberField.innerText == resultNumber) {
     replaceNumber(input);
   } else {
-    if (inputNumberField.innerText == 0 && input == 0) {
+    if (inputNumberField.innerText === 0 && input == 0) {
       return;
     } else if (inputNumberField.innerText === 0 && input != 0) {
       replaceNumber(input);
@@ -63,12 +59,12 @@ const checkInput = (input) => {
 };
 
 checkComma = (input) => {
-  if (inputNumberField.innerText.includes('.') && input == '.') {
-    return
+  if (inputNumberField.innerText.includes(".") && input == ".") {
+    return;
   } else {
-    appendNumber(input)
+    appendNumber(input);
   }
-}
+};
 
 const calculate = () => {
   switch (inputOperator) {
@@ -130,19 +126,19 @@ const replaceNumber = (input) => {
 };
 
 const calcAddition = (num1, num2) => {
-  return (parseFloat(num1) + parseFloat(num2));
+  return parseFloat(num1) + parseFloat(num2);
 };
 
 const calcSubtraction = (num1, num2) => {
-  return (parseFloat(num1) - parseFloat(num2));
+  return parseFloat(num1) - parseFloat(num2);
 };
 
 const calcMultiplication = (num1, num2) => {
-  return (parseFloat(num1) * parseFloat(num2));
+  return parseFloat(num1) * parseFloat(num2);
 };
 
 const calcDivision = (num1, num2) => {
-  return (parseFloat(num1) / parseFloat(num2));
+  return parseFloat(num1) / parseFloat(num2);
 };
 
 const deleteNumber = () => {
