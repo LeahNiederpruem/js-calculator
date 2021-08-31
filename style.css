@@ -89,6 +89,11 @@
   font-size: 18px;
 }
 
+.active {
+  background-color: hsl(0, 0%, 84%) !important;
+  font-size: 18px;
+}
+
 #button-side {
   background-color: hsl(0, 0%, 95%);
 }
