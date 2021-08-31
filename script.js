@@ -9,33 +9,97 @@ const bottomInput = document.querySelector(".bottomInput");
 
 inputOperator = undefined;
 savedInputNumber = undefined;
+currentNumber = undefined;
+resultNumber = undefined;
 
-(deleteButton.onclick = () => {
+deleteButton.onclick = () => {
   deleteNumber();
-}),
-  numberButtons.forEach((button) => {
-    button.onclick = () => {
-      checkInput(button.innerText);
-    };
-  });
+};
+
+clearButton.onclick = () => {
+  clearAll();
+};
+
+equalsButton.onclick = () => {
+  calculate();
+};
+
+numberButtons.forEach((button) => {
+  button.onclick = () => {
+    checkInput(button.innerText);
+  };
+});
 
 operationButtons.forEach((button) => {
   button.onclick = () => {
-    if (inputOperator == undefined) {
-      savedInputNumber = inputNumberField.innerText;
-      inputNumberField.innerText = ''
-    }
+    setOperator(button);
   };
 });
 
 const checkInput = (input) => {
-  if (inputNumberField.innerText == 0 && input == 0) {
-    return;
-  } else if (inputNumberField.innerText == 0 && input != 0) {
+  if (savedInputNumber == currentNumber) {
+    replaceNumber(input);
+  } else if (inputNumberField.innerText == resultNumber) {
     replaceNumber(input);
   } else {
-    appendNumber(input);
+    if (inputNumberField.innerText == 0 && input == 0) {
+      return;
+    } else if (inputNumberField.innerText == 0 && input != 0) {
+      replaceNumber(input);
+    } else {
+      appendNumber(input);
+    }
   }
+  currentNumber = inputNumberField.innerText;
+};
+
+const calculate = () => {
+  switch (inputOperator) {
+    case "+":
+      inputNumberField.innerText = calcAddition(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "-":
+      inputNumberField.innerText = calcSubtraction(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "⨉":
+      inputNumberField.innerText = calcMultiplication(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "÷":
+      inputNumberField.innerText = calcDivision(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+  }
+  resultNumber = inputNumberField.innerText;
+  removeActiveStyle();
+};
+
+const setOperator = (button) => {
+  // console.log(button);
+  savedInputNumber = inputNumberField.innerText;
+  inputOperator = button.innerText;
+  setActiveStyle(button);
+};
+
+const setActiveStyle = (button) => {
+  removeActiveStyle();
+  button.classList.add("active");
+};
+
+const removeActiveStyle = () => {
+  operationButtons.forEach((operationButton) => {
+    operationButton.classList.remove("active");
+  });
 };
 
 const appendNumber = (input) => {
@@ -43,8 +107,23 @@ const appendNumber = (input) => {
 };
 
 const replaceNumber = (input) => {
-  console.log(input);
   inputNumberField.innerText = input;
+};
+
+const calcAddition = (num1, num2) => {
+  return (parseFloat(num1) + parseFloat(num2)).toFixed(2);
+};
+
+const calcSubtraction = (num1, num2) => {
+  return (parseFloat(num1) - parseFloat(num2)).toFixed(2);
+};
+
+const calcMultiplication = (num1, num2) => {
+  return (parseFloat(num1) * parseFloat(num2)).toFixed(2);
+};
+
+const calcDivision = (num1, num2) => {
+  return (parseFloat(num1) / parseFloat(num2)).toFixed(2);
 };
 
 const deleteNumber = () => {
@@ -54,18 +133,17 @@ const deleteNumber = () => {
   }
 };
 
-const calcAddition = (num1, num2) => {
-  return parseFloat(num1 + num2).toFixed(2);
+const clearAll = () => {
+  inputNumberField.innerText = 0;
+  removeActiveStyle();
+  inputOperator = undefined;
+  savedInputNumber = undefined;
+  currentNumber = undefined;
+  resultNumber = undefined;
 };
 
-const calcSubtraction = (num1, num2) => {
-  return parseFloat(num1 - num2).toFixed(2);
-};
-
-const calcMultiplication = (num1, num2) => {
-  return parseFloat(num1 * num2).toFixed(2);
-};
-
-const calcDivision = (num1, num2) => {
-  return parseFloat(num1 / num2).toFixed(2);
+const isNumber = (input) => {
+  if (input.includes("Digit")) {
+    return true;
+  }
 };
