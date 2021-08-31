@@ -130,19 +130,19 @@ const replaceNumber = (input) => {
 };
 
 const calcAddition = (num1, num2) => {
-  return (parseFloat(num1) + parseFloat(num2)).toFixed(2);
+  return (parseFloat(num1) + parseFloat(num2));
 };
 
 const calcSubtraction = (num1, num2) => {
-  return (parseFloat(num1) - parseFloat(num2)).toFixed(2);
+  return (parseFloat(num1) - parseFloat(num2));
 };
 
 const calcMultiplication = (num1, num2) => {
-  return (parseFloat(num1) * parseFloat(num2)).toFixed(2);
+  return (parseFloat(num1) * parseFloat(num2));
 };
 
 const calcDivision = (num1, num2) => {
-  return (parseFloat(num1) / parseFloat(num2)).toFixed(2);
+  return (parseFloat(num1) / parseFloat(num2));
 };
 
 const deleteNumber = () => {
