@@ -27,6 +27,10 @@ equalsButton.onclick = () => {
 numberButtons.forEach((button) => {
   button.onclick = () => {
     checkInput(button.innerText);
+    console.log('-----------------------')
+    console.log('savedInputNumber', savedInputNumber)
+    console.log('currentNumber', currentNumber)
+    console.log('resultNumber', resultNumber)
   };
 });
 
@@ -37,6 +41,10 @@ operationButtons.forEach((button) => {
 });
 
 const checkInput = (input) => {
+  if(input == '.'){
+    return checkComma(input)
+  }
+
   if (savedInputNumber == currentNumber) {
     replaceNumber(input);
   } else if (inputNumberField.innerText == resultNumber) {
@@ -44,14 +52,23 @@ const checkInput = (input) => {
   } else {
     if (inputNumberField.innerText == 0 && input == 0) {
       return;
-    } else if (inputNumberField.innerText == 0 && input != 0) {
+    } else if (inputNumberField.innerText === 0 && input != 0) {
       replaceNumber(input);
     } else {
       appendNumber(input);
     }
   }
+
   currentNumber = inputNumberField.innerText;
 };
+
+checkComma = (input) => {
+  if (inputNumberField.innerText.includes('.') && input == '.') {
+    return
+  } else {
+    appendNumber(input)
+  }
+}
 
 const calculate = () => {
   switch (inputOperator) {
@@ -104,10 +121,12 @@ const removeActiveStyle = () => {
 
 const appendNumber = (input) => {
   inputNumberField.innerText += input;
+  currentNumber = inputNumberField.innerText;
 };
 
 const replaceNumber = (input) => {
   inputNumberField.innerText = input;
+  currentNumber = inputNumberField.innerText;
 };
 
 const calcAddition = (num1, num2) => {
