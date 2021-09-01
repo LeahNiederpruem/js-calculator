@@ -4,69 +4,44 @@ const operationButtons = document.querySelectorAll("[data-operation]");
 const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
+const plusminus = document.querySelector("[data-plusminus]");
 const inputNumberField = document.querySelector(".inputNumber");
 const bottomInput = document.querySelector(".bottomInput");
 
-let currentNumber = inputNumberField.innerHTML;
+inputOperator = undefined;
+savedInputNumber = undefined;
+currentNumber = 0;
+resultNumber = undefined;
 
-let inputNumber1 = undefined;
-let inputNumber2 = undefined;
-let selectedOperator = undefined;
-
-document.body.onkeydown = (e) => {
-  switch (e.key) {
-    case "+":
-      setOperator("+");
-      break;
-    case "-":
-      setOperator("-");
-      break;
-    case "*":
-      setOperator("*");
-      break;
-    case "/":
-      setOperator("/");
-      break;
-    case "Enter":
-      calculate();
-      break;
-  }
-
-  if (e.key == "Backspace") {
-    deleteNumber();
-  } else if (e.key.toLowerCase() == "c") {
-    clearAll();
-  } else if (e.key == ".") {
-    checkInput(e.key);
-  } else if (isNumber(e.code)) {
+document.body.onkeypress = (e) => {
+  if (isDigit(e.key)) {
     checkInput(e.key);
   }
+  debugLog();
 };
 
-numberButtons.forEach((button) => {
-  button.onclick = () => {
-    checkInput(button.innerText);
-  };
-});
+document.body.onkeydown = (e) => {
+  switch (e.key.toLowerCase()) {
+    case "enter":
+      calculate();
+      break;
+    case "backspace":
+      deleteNumber();
+      break;
+    case "c":
+      clearAll();
+      break;
+    case '.':
+      checkInput('.')
+    break;
+  }
+  debugLog();
+};
 
-operationButtons.forEach((button) => {
-  button.onclick = () => {
-    switch (button.innerText) {
-      case "+":
-        setOperator("+");
-        break;
-      case "-":
-        setOperator("-");
-        break;
-      case "⨉":
-        setOperator("*");
-        break;
-      case "÷":
-        setOperator("/");
-        break;
-    }
-  };
-});
+deleteButton.onclick = () => {
+  deleteNumber();
+  debugLog();
+};
 
 clearButton.onclick = () => {
   clearAll();
@@ -76,110 +51,124 @@ equalsButton.onclick = () => {
   calculate();
 };
 
-deleteButton.onclick = () => {
-  deleteNumber();
+plusminus.onclick = () => {
+  debugLog();
 };
+
+numberButtons.forEach((button) => {
+  button.onclick = () => {
+    checkInput(button.innerText);
+    debugLog();
+  };
+});
+
+operationButtons.forEach((button) => {
+  button.onclick = () => {
+    setOperator(button);
+  };
+});
 
 const checkInput = (input) => {
-  if (inputNumberField.innerText == 0 && input == 0) {
-    return;
-  } else if (inputNumberField.innerText.includes(".") && input == ".") {
-    return;
-  } else if (inputNumberField.innerText == 0 && input != 0) {
-    updateDisplay(input);
-  } else if (inputNumberField.innerText == 0 && input == ".") {
-    updateDisplay(input);
+  if (input == ".") {
+    return checkComma(input);
+  }
+
+  if (savedInputNumber == currentNumber) {
+    replaceNumber(input);
+  } else if (inputNumberField.innerText == resultNumber) {
+    replaceNumber(input);
   } else {
-    updateDisplay(input);
+    if (inputNumberField.innerText == '0' && input == 0) {
+      return;
+    } else if (inputNumberField.innerText == '0' && input != 0) {
+      replaceNumber(input);
+    } else {
+      appendNumber(input);
+    }
+  }
+  currentNumber = inputNumberField.innerText;
+};
+
+checkComma = (input) => {
+  if (inputNumberField.innerText.includes(".") && input == ".") {
+    return;
+  } else {
+    appendNumber(input);
   }
 };
 
-const updateDisplay = (input) => {
-  if (inputNumberField.innerText == 0 && input == ".") {
-    appendNumber(input);
-  } else if (inputNumberField.innerText == 0 && input != 0) {
-    replaceNumber(input);
-  } else {
-    appendNumber(input);
+const calculate = () => {
+  switch (inputOperator) {
+    case "+":
+      inputNumberField.innerText = calcAddition(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "-":
+      inputNumberField.innerText = calcSubtraction(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "⨉":
+      inputNumberField.innerText = calcMultiplication(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
+    case "÷":
+      inputNumberField.innerText = calcDivision(
+        savedInputNumber,
+        currentNumber
+      );
+      break;
   }
+  resultNumber = inputNumberField.innerText;
+  removeActiveStyle();
+};
+
+const setOperator = (button) => {
+  savedInputNumber = inputNumberField.innerText;
+  inputOperator = button.innerText;
+  setActiveStyle(button);
+};
+
+const setActiveStyle = (button) => {
+  removeActiveStyle();
+  button.classList.add("active");
+};
+
+const removeActiveStyle = () => {
+  operationButtons.forEach((operationButton) => {
+    operationButton.classList.remove("active");
+  });
 };
 
 const appendNumber = (input) => {
   inputNumberField.innerText += input;
-  setCurrentNumber();
+  currentNumber = inputNumberField.innerText;
 };
 
 const replaceNumber = (input) => {
   inputNumberField.innerText = input;
-  setCurrentNumber();
-};
-
-const setOperator = (operator) => {
-  selectedOperator = operator;
-  updateBottomInput();
-};
-
-const updateBottomInput = () => {
-  bottomInput.innerText = inputNumberField.innerText;
-  inputNumberField.innerText = 0;
-};
-
-const calculate = () => {
-  switch (selectedOperator) {
-    case "+":
-      bottomInput.innerText = calcAddition(
-        parseFloat(inputNumberField.innerText),
-        parseFloat(bottomInput.innerText)
-      );
-      break;
-    case "-":
-      bottomInput.innerText = calcSubtraction(
-        parseFloat(inputNumberField.innerText),
-        parseFloat(bottomInput.innerText)
-      );
-      break;
-    case "*":
-      bottomInput.innerText = calcMutliplication(
-        parseFloat(inputNumberField.innerText),
-        parseFloat(bottomInput.innerText)
-      );
-      break;
-    case "/":
-      bottomInput.innerText = calcDivision(
-        parseFloat(inputNumberField.innerText),
-        parseFloat(bottomInput.innerText)
-      );
-      break;
-  }
+  currentNumber = inputNumberField.innerText;
 };
 
 const calcAddition = (num1, num2) => {
-  return parseFloat(num1 + num2).toFixed(2);
+  return parseFloat(num1) + parseFloat(num2);
 };
 
 const calcSubtraction = (num1, num2) => {
-  return parseFloat(num1 - num2).toFixed(2);
+  return parseFloat(num1) - parseFloat(num2);
 };
 
-const calcMutliplication = (num1, num2) => {
-  return parseFloat(num1 * num2).toFixed(2);
+const calcMultiplication = (num1, num2) => {
+  return parseFloat(num1) * parseFloat(num2);
 };
 
 const calcDivision = (num1, num2) => {
-  return parseFloat(num1 / num2).toFixed(2);
-};
-
-const setCurrentNumber = () => {
-  currentNumber = inputNumberField.innerText;
-  console.log(currentNumber);
-};
-
-const clearAll = () => {
-  inputNumberField.innerText = 0;
-  bottomInput.innerText = 0;
-  inputNumber1 == undefined;
-  inputNumber2 == undefined;
-  selectedOperator == undefined;
+  return parseFloat(num1) / parseFloat(num2);
 };
 
 const deleteNumber = () => {
@@ -187,10 +176,25 @@ const deleteNumber = () => {
   if (inputNumberField.innerText.length == 0) {
     inputNumberField.innerText = 0;
   }
+  currentNumber = inputNumberField.innerText;
 };
 
-const isNumber = (input) => {
-  if (input.includes("Digit")) {
-    return true;
-  }
+const clearAll = () => {
+  removeActiveStyle();
+  inputNumberField.innerText = 0;
+  inputOperator = undefined;
+  savedInputNumber = undefined;
+  currentNumber = undefined;
+  resultNumber = undefined;
+};
+
+const isDigit = (input) => {
+  return /\d/.test(input);
+};
+
+const debugLog = () => {
+  console.log("savedInputNumber", savedInputNumber);
+  console.log("currentNumber", currentNumber);
+  console.log("resultNumber", resultNumber);
+  console.log("–––––––––––––––––––––––––––––––––");
 };
