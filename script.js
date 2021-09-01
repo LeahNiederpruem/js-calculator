@@ -4,16 +4,44 @@ const operationButtons = document.querySelectorAll("[data-operation]");
 const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
+const plusminus = document.querySelector("[data-plusminus]");
 const inputNumberField = document.querySelector(".inputNumber");
 const bottomInput = document.querySelector(".bottomInput");
 
 inputOperator = undefined;
 savedInputNumber = undefined;
-currentNumber = undefined;
+currentNumber = 0;
 resultNumber = undefined;
+
+document.body.onkeypress = (e) => {
+  if (isDigit(e.key)) {
+    checkInput(e.key);
+  }
+  debugLog();
+};
+
+document.body.onkeydown = (e) => {
+  // console.log(e.key.toLowerCase())
+  switch (e.key.toLowerCase()) {
+    case "enter":
+      calculate();
+      break;
+    case "backspace":
+      deleteNumber();
+      break;
+    case "c":
+      clearAll();
+      break;
+    case '.':
+      checkInput('.')
+    break;
+  }
+  debugLog();
+};
 
 deleteButton.onclick = () => {
   deleteNumber();
+  debugLog();
 };
 
 clearButton.onclick = () => {
@@ -24,9 +52,14 @@ equalsButton.onclick = () => {
   calculate();
 };
 
+plusminus.onclick = () => {
+  debugLog();
+};
+
 numberButtons.forEach((button) => {
   button.onclick = () => {
     checkInput(button.innerText);
+    debugLog();
   };
 });
 
@@ -46,15 +79,14 @@ const checkInput = (input) => {
   } else if (inputNumberField.innerText == resultNumber) {
     replaceNumber(input);
   } else {
-    if (inputNumberField.innerText === 0 && input == 0) {
+    if (inputNumberField.innerText == '0' && input == 0) {
       return;
-    } else if (inputNumberField.innerText === 0 && input != 0) {
+    } else if (inputNumberField.innerText == '0' && input != 0) {
       replaceNumber(input);
     } else {
       appendNumber(input);
     }
   }
-
   currentNumber = inputNumberField.innerText;
 };
 
@@ -98,7 +130,6 @@ const calculate = () => {
 };
 
 const setOperator = (button) => {
-  // console.log(button);
   savedInputNumber = inputNumberField.innerText;
   inputOperator = button.innerText;
   setActiveStyle(button);
@@ -146,19 +177,25 @@ const deleteNumber = () => {
   if (inputNumberField.innerText.length == 0) {
     inputNumberField.innerText = 0;
   }
+  currentNumber = inputNumberField.innerText;
 };
 
 const clearAll = () => {
-  inputNumberField.innerText = 0;
   removeActiveStyle();
+  inputNumberField.innerText = 0;
   inputOperator = undefined;
   savedInputNumber = undefined;
   currentNumber = undefined;
   resultNumber = undefined;
 };
 
-const isNumber = (input) => {
-  if (input.includes("Digit")) {
-    return true;
-  }
+const isDigit = (input) => {
+  return /\d/.test(input);
+};
+
+const debugLog = () => {
+  console.log("savedInputNumber", savedInputNumber);
+  console.log("currentNumber", currentNumber);
+  console.log("resultNumber", resultNumber);
+  console.log("–––––––––––––––––––––––––––––––––");
 };
