@@ -14,7 +14,7 @@
 }
 
 .windowWrapper {
-  width: auto;
+  max-width: 320px;
   border-radius: 6px;
   overflow: hidden;
   /* box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
@@ -41,7 +41,8 @@
 
 .inputNumber {
   padding: 0px 10px;
-  font-size: 2.3rem;
+  /* font-size: 2.3rem; */
+  font-size: 1.7rem;
 }
 
 .numpadWrapper {
