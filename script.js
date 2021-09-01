@@ -27,11 +27,11 @@ document.body.onkeydown = (e) => {
     case "backspace":
       deleteNumber();
       break;
-    case "_":
-      toggleNegative();
-      break;
     case "c":
       clearAll();
+      break;
+    case "_":
+      toggleNegative();
       break;
     case ".":
       checkInput(".");
