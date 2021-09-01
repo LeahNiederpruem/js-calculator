@@ -61,7 +61,7 @@ equalsButton.onclick = () => {
 };
 
 plusminus.onclick = () => {
-  debugLog();
+  toggleNegative();
 };
 
 numberButtons.forEach((button) => {
@@ -153,6 +153,15 @@ const removeActiveStyle = () => {
   operationButtons.forEach((operationButton) => {
     operationButton.classList.remove("active");
   });
+};
+
+const toggleNegative = () => {
+  if (Math.sign(currentNumber) == 1) {
+    currentNumber = Math.abs(currentNumber) * -1;
+  } else {
+    currentNumber = Math.abs(currentNumber) * 1;
+  }
+  inputNumberField.innerText = currentNumber;
 };
 
 const appendNumber = (input) => {
