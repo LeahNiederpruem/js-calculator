@@ -17,7 +17,6 @@ document.body.onkeypress = (e) => {
   if (isDigit(e.key)) {
     checkInput(e.key);
   }
-  debugLog();
 };
 
 document.body.onkeydown = (e) => {
@@ -31,16 +30,26 @@ document.body.onkeydown = (e) => {
     case "c":
       clearAll();
       break;
-    case '.':
-      checkInput('.')
-    break;
+    case ".":
+      checkInput(".");
+      break;
+    case "+":
+      setOperator("addition");
+      break;
+    case "-":
+      setOperator("subtraction");
+      break;
+    case "*":
+      setOperator("multiplication");
+      break;
+    case "/":
+      setOperator("division");
+      break;
   }
-  debugLog();
 };
 
 deleteButton.onclick = () => {
   deleteNumber();
-  debugLog();
 };
 
 clearButton.onclick = () => {
@@ -58,13 +67,12 @@ plusminus.onclick = () => {
 numberButtons.forEach((button) => {
   button.onclick = () => {
     checkInput(button.innerText);
-    debugLog();
   };
 });
 
 operationButtons.forEach((button) => {
   button.onclick = () => {
-    setOperator(button);
+    setOperator(button.dataset.operation);
   };
 });
 
@@ -78,9 +86,9 @@ const checkInput = (input) => {
   } else if (inputNumberField.innerText == resultNumber) {
     replaceNumber(input);
   } else {
-    if (inputNumberField.innerText == '0' && input == 0) {
+    if (inputNumberField.innerText == "0" && input == 0) {
       return;
-    } else if (inputNumberField.innerText == '0' && input != 0) {
+    } else if (inputNumberField.innerText == "0" && input != 0) {
       replaceNumber(input);
     } else {
       appendNumber(input);
@@ -99,25 +107,25 @@ checkComma = (input) => {
 
 const calculate = () => {
   switch (inputOperator) {
-    case "+":
+    case "addition":
       inputNumberField.innerText = calcAddition(
         savedInputNumber,
         currentNumber
       );
       break;
-    case "-":
+    case "subtraction":
       inputNumberField.innerText = calcSubtraction(
         savedInputNumber,
         currentNumber
       );
       break;
-    case "⨉":
+    case "multiplication":
       inputNumberField.innerText = calcMultiplication(
         savedInputNumber,
         currentNumber
       );
       break;
-    case "÷":
+    case "division":
       inputNumberField.innerText = calcDivision(
         savedInputNumber,
         currentNumber
@@ -128,15 +136,17 @@ const calculate = () => {
   removeActiveStyle();
 };
 
-const setOperator = (button) => {
+const setOperator = (input) => {
+  console.log(input);
   savedInputNumber = inputNumberField.innerText;
-  inputOperator = button.innerText;
-  setActiveStyle(button);
+  inputOperator = input;
+  setActiveStyle(input);
 };
 
-const setActiveStyle = (button) => {
+const setActiveStyle = (input) => {
   removeActiveStyle();
-  button.classList.add("active");
+  const styleButton = document.querySelector(`.${input}`);
+  styleButton.classList.add("active");
 };
 
 const removeActiveStyle = () => {
@@ -146,6 +156,9 @@ const removeActiveStyle = () => {
 };
 
 const appendNumber = (input) => {
+  if (inputNumberField.innerText.length > 16) {
+    return;
+  }
   inputNumberField.innerText += input;
   currentNumber = inputNumberField.innerText;
 };
