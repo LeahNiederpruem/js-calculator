@@ -26,17 +26,13 @@
 
 .topWrapper {
   height: 100px;
-  width: 100%;
+  padding: 0px 5px;
   background-color: black;
   color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-direction: row;
-}
-
-.operatorDisplay {
-  opacity: 50%;
+  justify-content: flex-end;
 }
 
 .inputNumber {
