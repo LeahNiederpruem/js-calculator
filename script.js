@@ -8,10 +8,10 @@ const plusminus = document.querySelector("[data-plusminus]");
 const inputNumberField = document.querySelector(".inputNumber");
 const bottomInput = document.querySelector(".bottomInput");
 
-inputOperator = undefined;
-savedInputNumber = undefined;
-currentNumber = 0;
-resultNumber = undefined;
+let inputOperator = undefined;
+let savedInputNumber = undefined;
+let currentNumber = 0;
+let resultNumber = undefined;
 
 document.body.onkeypress = (e) => {
   if (isDigit(e.key)) {
@@ -137,7 +137,7 @@ const calculate = () => {
 };
 
 const setOperator = (input) => {
-  console.log(input);
+  calculate();
   savedInputNumber = inputNumberField.innerText;
   inputOperator = input;
   setActiveStyle(input);
