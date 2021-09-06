@@ -16,6 +16,7 @@ let resultNumber = undefined;
 document.body.onkeypress = (e) => {
   if (isDigit(e.key)) {
     checkInput(e.key);
+    pressEvent(e.key);
   }
 };
 
@@ -35,6 +36,7 @@ document.body.onkeydown = (e) => {
       break;
     case ".":
       checkInput(".");
+      pressEvent(e.key);
       break;
     case "+":
       setOperator("addition");
@@ -216,6 +218,21 @@ const clearAll = () => {
 const isDigit = (input) => {
   return /\d/.test(input);
 };
+
+const pressEvent = (input) => {
+  const number = document.querySelector(`[data-number="${input}"]`);
+  number.classList.add("keydown");
+};
+
+const removePressEventStyle = (e) => {
+  e.target.classList.remove("keydown");
+};
+
+numberButtons.forEach((button) => {
+  button.ontransitionend = (e) => {
+    removeClickEvent(e);
+  };
+});
 
 const debugLog = () => {
   console.log("savedInputNumber", savedInputNumber);
