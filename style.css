@@ -77,7 +77,7 @@
   background-color: white;
   font-weight: 400;
   font-size: 1.3rem;
-  transition: all 0.1s;
+  transition: all .1s;
 }
 
 .calcButton:hover {
@@ -92,6 +92,11 @@
 
 .active {
   background-color: hsl(0, 0%, 90%) !important;
+}
+
+.keydown {
+  background-color: hsl(0, 0%, 85%) !important;
+  font-size: 18px;
 }
 
 #button-side {
