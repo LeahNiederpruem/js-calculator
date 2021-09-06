@@ -230,7 +230,7 @@ const removePressEventStyle = (e) => {
 
 numberButtons.forEach((button) => {
   button.ontransitionend = (e) => {
-    removeClickEvent(e);
+    removePressEventStyle(e);
   };
 });
 
