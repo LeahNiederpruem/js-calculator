@@ -78,7 +78,7 @@
   background-color: white;
   font-weight: 400;
   font-size: 1.3rem;
-  transition: all .1s;
+  transition: all .06s;
 }
 
 .calcButton:hover {
