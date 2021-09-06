@@ -224,13 +224,13 @@ const pressEvent = (input) => {
   number.classList.add("keydown");
 };
 
-const removePressEventStyle = (e) => {
-  e.target.classList.remove("keydown");
-};
+// const removePressEventStyle = (e) => {
+//   e.target.classList.remove("keydown");
+// };
 
 numberButtons.forEach((button) => {
   button.ontransitionend = (e) => {
-    removePressEventStyle(e);
+    e.target.classList.remove("keydown");
   };
 });
 
