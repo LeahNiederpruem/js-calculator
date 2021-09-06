@@ -6,7 +6,7 @@ const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const plusminus = document.querySelector("[data-plusminus]");
 const inputNumberField = document.querySelector(".inputNumber");
-const bottomInput = document.querySelector(".bottomInput");
+const previewCalc = document.querySelector(".previewCalc");
 
 let inputOperator = undefined;
 let savedInputNumber = undefined;
@@ -81,30 +81,30 @@ operationButtons.forEach((button) => {
 
 const checkInput = (input) => {
   if (input == ".") {
-    return checkComma(input);
+    return checkDecimal(input);
   }
 
   if (savedInputNumber == currentNumber) {
-    replaceNumber(input);
+    replaceInput(input);
   } else if (inputNumberField.innerText == resultNumber) {
-    replaceNumber(input);
+    replaceInput(input);
   } else {
     if (inputNumberField.innerText == "0" && input == 0) {
       return;
     } else if (inputNumberField.innerText == "0" && input != 0) {
-      replaceNumber(input);
+      replaceInput(input);
     } else {
-      appendNumber(input);
+      appendInput(input);
     }
   }
   currentNumber = inputNumberField.innerText;
 };
 
-checkComma = (input) => {
+checkDecimal = (input) => {
   if (inputNumberField.innerText.includes(".") && input == ".") {
     return;
   } else {
-    appendNumber(input);
+    appendInput(input);
   }
 };
 
@@ -167,7 +167,7 @@ const toggleNegative = () => {
   inputNumberField.innerText = currentNumber;
 };
 
-const appendNumber = (input) => {
+const appendInput = (input) => {
   if (inputNumberField.innerText.length > 16) {
     return;
   }
@@ -175,7 +175,7 @@ const appendNumber = (input) => {
   currentNumber = inputNumberField.innerText;
 };
 
-const replaceNumber = (input) => {
+const replaceInput = (input) => {
   inputNumberField.innerText = input;
   currentNumber = inputNumberField.innerText;
 };
