@@ -31,7 +31,7 @@ document.body.onkeydown = (e) => {
       clearAll();
       break;
     case "_":
-      toggleNegative();
+      changeSign();
       break;
     case ".":
       checkInput(".");
@@ -64,7 +64,7 @@ equalsButton.onclick = () => {
 };
 
 plusminus.onclick = () => {
-  toggleNegative();
+  changeSign();
 };
 
 numberButtons.forEach((button) => {
@@ -158,7 +158,7 @@ const removeActiveStyle = () => {
   });
 };
 
-const toggleNegative = () => {
+const changeSign = () => {
   if (Math.sign(currentNumber) == 1) {
     currentNumber = Math.abs(currentNumber) * -1;
   } else {
