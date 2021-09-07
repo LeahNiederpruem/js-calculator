@@ -6,7 +6,6 @@ const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const plusminus = document.querySelector("[data-plusminus]");
 const inputNumberField = document.querySelector(".inputNumber");
-const previewCalc = document.querySelector(".previewCalc");
 
 let inputOperator = undefined;
 let savedInputNumber = undefined;
@@ -113,33 +112,30 @@ checkDecimal = (input) => {
 const calculate = () => {
   switch (inputOperator) {
     case "addition":
-      inputNumberField.innerText = calcAddition(
-        savedInputNumber,
-        currentNumber
-      );
+      updateDisplay(calcAddition(savedInputNumber, currentNumber))
       break;
     case "subtraction":
-      inputNumberField.innerText = calcSubtraction(
-        savedInputNumber,
-        currentNumber
-      );
+      updateDisplay(calcSubtraction(savedInputNumber, currentNumber))
       break;
     case "multiplication":
-      inputNumberField.innerText = calcMultiplication(
-        savedInputNumber,
-        currentNumber
-      );
+      updateDisplay(calcMultiplication(savedInputNumber, currentNumber))
       break;
     case "division":
-      inputNumberField.innerText = calcDivision(
-        savedInputNumber,
-        currentNumber
-      );
+      updateDisplay(calcDivision(savedInputNumber, currentNumber))
       break;
   }
   resultNumber = inputNumberField.innerText;
   removeActiveStyle();
 };
+
+const updateDisplay = (input) => {
+  console.log(input.toString().length)
+  if(input.toString().length >= 16){
+    inputNumberField.innerText = parseFloat(input).toFixed(13)
+  } else {
+    inputNumberField.innerText = input
+  }
+}
 
 const setOperator = (input) => {
   calculate();
@@ -223,10 +219,6 @@ const keyPressEvent = (input) => {
   const number = document.querySelector(`[data-number="${input}"]`);
   number.classList.add("keydown");
 };
-
-// const removePressEventStyle = (e) => {
-//   e.target.classList.remove("keydown");
-// };
 
 numberButtons.forEach((button) => {
   button.ontransitionend = (e) => {
