@@ -131,7 +131,7 @@ const calculate = () => {
 const updateDisplay = (input) => {
   console.log(input.toString().length)
   if(input.toString().length >= 16){
-    inputNumberField.innerText = parseFloat(input).toFixed(13)
+    inputNumberField.innerText = parseFloat(input).toFixed(14)
   } else {
     inputNumberField.innerText = input
   }
@@ -166,7 +166,7 @@ const changeSign = () => {
 };
 
 const appendInput = (input) => {
-  if (inputNumberField.innerText.length > 16) {
+  if (inputNumberField.innerText.length > 14) {
     return;
   }
   inputNumberField.innerText += input;
