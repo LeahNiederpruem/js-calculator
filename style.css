@@ -36,7 +36,7 @@
 
 .inputNumber {
   /* font-size: 1.7rem; */
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .previewCalc {
@@ -83,20 +83,20 @@
 
 .calcButton:hover {
   transition: all 0.1s;
-  background-color: hsl(0, 0%, 90%) !important;
+  background: hsl(0, 0%, 90%) !important;
 }
 
 .calcButton:active {
-  background-color: hsl(0, 0%, 85%) !important;
+  background: hsl(0, 0%, 85%) !important;
   font-size: 18px;
 }
 
 .active {
-  background-color: hsl(0, 0%, 90%) !important;
+  background: hsl(0, 0%, 90%);
 }
 
 .keydown {
-  background-color: hsl(0, 0%, 85%) !important;
+  background: hsl(0, 0%, 85%);
   font-size: 18px;
 }
 
