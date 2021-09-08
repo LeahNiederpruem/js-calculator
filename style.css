@@ -6,6 +6,10 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+body {
+  background-color: white;
+}
+
 .mainWrapper {
   height: 100vh;
   display: flex;
@@ -15,10 +19,10 @@
 
 .windowWrapper {
   max-width: 320px;
-  border-radius: 6px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 22px 70px 4px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0);
+  box-shadow: 0px 36px 100px 0px rgba(0, 0, 0, .2),
+    0px 0px 1px 0px rgba(0, 0, 0, .55)
 }
 
 .topWrapper {
@@ -78,7 +82,7 @@
   background-color: white;
   font-weight: 400;
   font-size: 1.3rem;
-  transition: all .06s;
+  transition: all 0.06s;
 }
 
 .calcButton:hover {
