@@ -127,6 +127,7 @@ const calculate = () => {
       break;
   }
   resultNumber = inputNumberField.innerText;
+  savedInputNumber = resultNumber
   removeActiveStyle();
 };
 
@@ -210,6 +211,7 @@ const deleteNumber = () => {
 const clearAll = () => {
   removeActiveStyle();
   inputNumberField.innerText = 0;
+  replaceNumber = true
   inputOperator = undefined;
   savedInputNumber = undefined;
   currentNumber = undefined;
