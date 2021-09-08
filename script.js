@@ -12,6 +12,8 @@ let savedInputNumber = undefined;
 let currentNumber = 0;
 let resultNumber = undefined;
 
+let replaceNumber = true;
+
 document.body.onkeypress = (e) => {
   if (isDigit(e.key)) {
     checkInput(e.key);
@@ -82,22 +84,22 @@ operationButtons.forEach((button) => {
 
 const checkInput = (input) => {
   if (input == ".") {
+    replaceNumber = false
     return checkDecimal(input);
   }
 
-  if (savedInputNumber == currentNumber) {
-    replaceInput(input);
-  } else if (inputNumberField.innerText == resultNumber) {
-    replaceInput(input);
-  } else {
-    if (inputNumberField.innerText == "0" && input == 0) {
-      return;
-    } else if (inputNumberField.innerText == "0" && input != 0) {
-      replaceInput(input);
-    } else {
-      appendInput(input);
-    }
+  if (inputNumberField.innerText == "0" && input == 0) {
+    replaceNumber = true;
+    return;
   }
+
+  if (replaceNumber) {
+    replaceInput(input);
+    replaceNumber = false;
+  } else if (!replaceNumber) {
+    appendInput(input);
+  }
+
   currentNumber = inputNumberField.innerText;
 };
 
@@ -112,16 +114,16 @@ checkDecimal = (input) => {
 const calculate = () => {
   switch (inputOperator) {
     case "addition":
-      updateDisplay(calcAddition(savedInputNumber, currentNumber))
+      updateDisplay(calcAddition(savedInputNumber, currentNumber));
       break;
     case "subtraction":
-      updateDisplay(calcSubtraction(savedInputNumber, currentNumber))
+      updateDisplay(calcSubtraction(savedInputNumber, currentNumber));
       break;
     case "multiplication":
-      updateDisplay(calcMultiplication(savedInputNumber, currentNumber))
+      updateDisplay(calcMultiplication(savedInputNumber, currentNumber));
       break;
     case "division":
-      updateDisplay(calcDivision(savedInputNumber, currentNumber))
+      updateDisplay(calcDivision(savedInputNumber, currentNumber));
       break;
   }
   resultNumber = inputNumberField.innerText;
@@ -129,15 +131,15 @@ const calculate = () => {
 };
 
 const updateDisplay = (input) => {
-  console.log(input.toString().length)
-  if(input.toString().length >= 16){
-    inputNumberField.innerText = parseFloat(input).toFixed(14)
+  if (input.toString().length >= 16) {
+    inputNumberField.innerText = parseFloat(input).toFixed(14);
   } else {
-    inputNumberField.innerText = input
+    inputNumberField.innerText = input;
   }
-}
+};
 
 const setOperator = (input) => {
+  replaceNumber = true;
   calculate();
   savedInputNumber = inputNumberField.innerText;
   inputOperator = input;
@@ -197,7 +199,10 @@ const calcDivision = (num1, num2) => {
 const deleteNumber = () => {
   inputNumberField.innerText = inputNumberField.innerText.slice(0, -1);
   if (inputNumberField.innerText.length == 0) {
+    replaceNumber = true;
     inputNumberField.innerText = 0;
+  } else if (inputNumberField.innerText == '0'){
+    replaceNumber = true
   }
   currentNumber = inputNumberField.innerText;
 };
@@ -230,5 +235,6 @@ const debugLog = () => {
   console.log("savedInputNumber", savedInputNumber);
   console.log("currentNumber", currentNumber);
   console.log("resultNumber", resultNumber);
+  console.log(replaceNumber)
   console.log("–––––––––––––––––––––––––––––––––");
 };
