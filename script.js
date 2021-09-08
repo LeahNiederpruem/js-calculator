@@ -129,6 +129,7 @@ const calculate = () => {
   resultNumber = inputNumberField.innerText;
   savedInputNumber = resultNumber;
   replaceNumber = true;
+  currentNumber = 0
   removeActiveStyle();
 };
 
@@ -141,8 +142,8 @@ const updateDisplay = (input) => {
 };
 
 const setOperator = (input) => {
-  replaceNumber = true;
   calculate();
+  replaceNumber = true;
   savedInputNumber = inputNumberField.innerText;
   inputOperator = input;
   setActiveStyle(input);
@@ -238,6 +239,7 @@ const debugLog = () => {
   console.log("savedInputNumber", savedInputNumber);
   console.log("currentNumber", currentNumber);
   console.log("resultNumber", resultNumber);
+  console.log('inputOperator', inputOperator)
   console.log(replaceNumber);
   console.log("–––––––––––––––––––––––––––––––––");
 };
