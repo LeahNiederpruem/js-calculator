@@ -84,7 +84,7 @@ operationButtons.forEach((button) => {
 
 const checkInput = (input) => {
   if (input == ".") {
-    replaceNumber = false
+    replaceNumber = false;
     return checkDecimal(input);
   }
 
@@ -127,7 +127,8 @@ const calculate = () => {
       break;
   }
   resultNumber = inputNumberField.innerText;
-  savedInputNumber = resultNumber
+  savedInputNumber = resultNumber;
+  replaceNumber = true;
   removeActiveStyle();
 };
 
@@ -202,8 +203,8 @@ const deleteNumber = () => {
   if (inputNumberField.innerText.length == 0) {
     replaceNumber = true;
     inputNumberField.innerText = 0;
-  } else if (inputNumberField.innerText == '0'){
-    replaceNumber = true
+  } else if (inputNumberField.innerText == "0") {
+    replaceNumber = true;
   }
   currentNumber = inputNumberField.innerText;
 };
@@ -211,7 +212,7 @@ const deleteNumber = () => {
 const clearAll = () => {
   removeActiveStyle();
   inputNumberField.innerText = 0;
-  replaceNumber = true
+  replaceNumber = true;
   inputOperator = undefined;
   savedInputNumber = undefined;
   currentNumber = undefined;
@@ -237,6 +238,6 @@ const debugLog = () => {
   console.log("savedInputNumber", savedInputNumber);
   console.log("currentNumber", currentNumber);
   console.log("resultNumber", resultNumber);
-  console.log(replaceNumber)
+  console.log(replaceNumber);
   console.log("–––––––––––––––––––––––––––––––––");
 };
