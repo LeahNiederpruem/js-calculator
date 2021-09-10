@@ -37,7 +37,6 @@ document.body.onkeydown = (e) => {
       break;
     case ".":
       checkInput(".");
-      keyPressEvent(e.key);
       break;
     case "+":
       setOperator("addition");
