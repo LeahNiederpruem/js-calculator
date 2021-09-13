@@ -14,16 +14,8 @@ let resultNumber = undefined;
 
 let replaceNumber = true;
 
-document.body.onkeypress = (e) => {
-  if (isDigit(e.key)) {
-    checkInput(e.key);
-    keyPressEvent(e.key);
-  }
-  debugLog() 
-};
-
 document.body.onkeydown = (e) => {
-  switch (e.key.toLowerCase()) {
+   switch (e.key.toLowerCase()) {
     case "enter":
       calculate();
       break;
@@ -52,6 +44,11 @@ document.body.onkeydown = (e) => {
     case "/":
       setOperator("division");
       break;
+  }
+
+  if (isDigit(e.key)) {
+    checkInput(e.key);
+    keyPressEvent(e.key);
   }
 };
 
@@ -130,7 +127,7 @@ const calculate = () => {
   resultNumber = inputNumberField.innerText;
   savedInputNumber = resultNumber;
   replaceNumber = true;
-  currentNumber = 0
+  currentNumber = 0;
   removeActiveStyle();
 };
 
@@ -222,7 +219,10 @@ const clearAll = () => {
 };
 
 const isDigit = (input) => {
-  return /\d/.test(input);
+  if (input.length == '1' && /\d/.test(input)){
+    console.log(input)
+    return /\d/.test(input)
+  }
 };
 
 const keyPressEvent = (input) => {
@@ -240,7 +240,7 @@ const debugLog = () => {
   console.log("savedInputNumber", savedInputNumber);
   console.log("currentNumber", currentNumber);
   console.log("resultNumber", resultNumber);
-  console.log('inputOperator', inputOperator)
+  console.log("inputOperator", inputOperator);
   console.log(replaceNumber);
   console.log("–––––––––––––––––––––––––––––––––");
 };
