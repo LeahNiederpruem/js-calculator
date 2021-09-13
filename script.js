@@ -75,7 +75,7 @@ const checkInput = (input) => {
   if (input === ".") {
     replaceNumber = false;
     return appendDecimal(input);
-  } else if (inputNumberField.innerText === "0" && input === 0) {
+  } else if (inputNumberField.innerText === "0" && input === "0") {
     replaceNumber = true;
     return;
   }
@@ -231,8 +231,19 @@ const isDigit = (input) => {
 };
 
 const keyPressEvent = (input) => {
+  removeKeydownStyle();
   const number = document.querySelector(`[data-number="${input}"]`);
   number.classList.add("keydown");
+
+  document.body.onkeyup = (e) => {
+    number.classList.remove("keydown");
+  };
+};
+
+const removeKeydownStyle = () => {
+  numberButtons.forEach((button) => {
+    button.classList.remove("keydown");
+  });
 };
 
 numberButtons.forEach((button) => {
