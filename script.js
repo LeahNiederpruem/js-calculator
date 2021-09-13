@@ -19,6 +19,7 @@ document.body.onkeypress = (e) => {
     checkInput(e.key);
     keyPressEvent(e.key);
   }
+  debugLog() 
 };
 
 document.body.onkeydown = (e) => {
@@ -151,7 +152,7 @@ const setOperator = (input) => {
 
 const setActiveStyle = (input) => {
   removeActiveStyle();
-  const styleButton = document.querySelector(`.${input}`);
+  const styleButton = document.querySelector(`#${input}`);
   styleButton.classList.add("active");
 };
 

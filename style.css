@@ -39,7 +39,6 @@ body {
 }
 
 .inputNumber {
-  /* font-size: 1.7rem; */
   font-size: 2rem;
 }
 
@@ -87,11 +86,11 @@ body {
 
 .calcButton:hover {
   transition: all 0.1s;
-  background: hsl(0, 0%, 90%) !important;
+  background: hsl(0, 0%, 90%);
 }
 
 .calcButton:active {
-  background: hsl(0, 0%, 85%) !important;
+  background: hsl(0, 0%, 85%);
   font-size: 18px;
 }
 
@@ -104,10 +103,10 @@ body {
   font-size: 18px;
 }
 
-#button-side {
+.button-side {
   background-color: hsl(0, 0%, 95%);
 }
 
-#button-wide {
+.button-wide {
   width: 160px;
 }
