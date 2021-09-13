@@ -1,6 +1,7 @@
 const allButtons = document.getElementsByTagName("button");
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
+const functionButtons = document.querySelectorAll("[data-function]");
 const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
@@ -52,22 +53,6 @@ document.body.onkeydown = (e) => {
   }
 };
 
-deleteButton.onclick = () => {
-  deleteNumber();
-};
-
-clearButton.onclick = () => {
-  clearAll();
-};
-
-equalsButton.onclick = () => {
-  calculate();
-};
-
-plusminus.onclick = () => {
-  changeSign();
-};
-
 numberButtons.forEach((button) => {
   button.onclick = () => {
     checkInput(button.innerText);
@@ -77,6 +62,12 @@ numberButtons.forEach((button) => {
 operationButtons.forEach((button) => {
   button.onclick = () => {
     setOperator(button.dataset.operation);
+  };
+});
+
+functionButtons.forEach((button) => {
+  button.onclick = () => {
+    useFunction(button.dataset.function);
   };
 });
 
@@ -97,6 +88,23 @@ const checkInput = (input) => {
   }
 
   currentNumber = inputNumberField.innerText;
+};
+
+const useFunction = (input) => {
+  switch (input) {
+    case "clear":
+      clearAll();
+      break;
+    case "delete":
+      deleteNumber();
+      break;
+    case "plusminus":
+      changeSign();
+      break;
+    case "equals":
+      calculate();
+      break;
+  }
 };
 
 appendDecimal = (input) => {
