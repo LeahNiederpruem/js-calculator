@@ -83,10 +83,8 @@ operationButtons.forEach((button) => {
 const checkInput = (input) => {
   if (input === ".") {
     replaceNumber = false;
-    return checkDecimal(input);
-  }
-
-  if (inputNumberField.innerText === "0" && input === 0) {
+    return appendDecimal(input);
+  } else if (inputNumberField.innerText === "0" && input === 0) {
     replaceNumber = true;
     return;
   }
@@ -101,7 +99,7 @@ const checkInput = (input) => {
   currentNumber = inputNumberField.innerText;
 };
 
-checkDecimal = (input) => {
+appendDecimal = (input) => {
   if (inputNumberField.innerText.includes(".") && input === ".") {
     return;
   } else {
