@@ -15,7 +15,7 @@ let resultNumber = undefined;
 let replaceNumber = true;
 
 document.body.onkeydown = (e) => {
-   switch (e.key.toLowerCase()) {
+  switch (e.key.toLowerCase()) {
     case "enter":
       calculate();
       break;
@@ -81,12 +81,12 @@ operationButtons.forEach((button) => {
 });
 
 const checkInput = (input) => {
-  if (input == ".") {
+  if (input === ".") {
     replaceNumber = false;
     return checkDecimal(input);
   }
 
-  if (inputNumberField.innerText == "0" && input == 0) {
+  if (inputNumberField.innerText === "0" && input === 0) {
     replaceNumber = true;
     return;
   }
@@ -102,7 +102,7 @@ const checkInput = (input) => {
 };
 
 checkDecimal = (input) => {
-  if (inputNumberField.innerText.includes(".") && input == ".") {
+  if (inputNumberField.innerText.includes(".") && input === ".") {
     return;
   } else {
     appendInput(input);
@@ -160,7 +160,7 @@ const removeActiveStyle = () => {
 };
 
 const changeSign = () => {
-  if (Math.sign(currentNumber) == 1) {
+  if (Math.sign(currentNumber) === 1) {
     currentNumber = Math.abs(currentNumber) * -1;
   } else {
     currentNumber = Math.abs(currentNumber) * 1;
@@ -199,10 +199,10 @@ const calcDivision = (num1, num2) => {
 
 const deleteNumber = () => {
   inputNumberField.innerText = inputNumberField.innerText.slice(0, -1);
-  if (inputNumberField.innerText.length == 0) {
+  if (inputNumberField.innerText.length === 0) {
     replaceNumber = true;
     inputNumberField.innerText = 0;
-  } else if (inputNumberField.innerText == "0") {
+  } else if (inputNumberField.innerText === "0") {
     replaceNumber = true;
   }
   currentNumber = inputNumberField.innerText;
@@ -219,9 +219,8 @@ const clearAll = () => {
 };
 
 const isDigit = (input) => {
-  if (input.length == '1' && /\d/.test(input)){
-    console.log(input)
-    return /\d/.test(input)
+  if (input.length === 1 && /\d/.test(input)) {
+    return /\d/.test(input);
   }
 };
 
