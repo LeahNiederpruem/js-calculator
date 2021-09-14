@@ -31,7 +31,7 @@ document.body.onkeydown = (e) => {
       break;
     case ".":
       checkInput(".");
-      keyPressEvent(e.key);
+      addKeydownStyle(e.key);
       break;
     case "+":
       setOperator("addition");
@@ -49,7 +49,7 @@ document.body.onkeydown = (e) => {
 
   if (isDigit(e.key)) {
     checkInput(e.key);
-    keyPressEvent(e.key);
+    addKeydownStyle(e.key);
   }
 };
 
@@ -233,7 +233,7 @@ const isDigit = (input) => {
   }
 };
 
-const keyPressEvent = (input) => {
+const addKeydownStyle = (input) => {
   removeKeydownStyle();
   const number = document.querySelector(`[data-number="${input}"]`);
   number.classList.add("keydown");
