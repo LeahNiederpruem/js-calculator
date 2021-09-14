@@ -54,9 +54,8 @@ document.body.onkeydown = (e) => {
 };
 
 numberButtons.forEach((button) => {
-  button.innerText = button.dataset.number
   button.onclick = () => {
-    checkInput(button.innerText);
+    checkInput(button.dataset.number);
   };
 });
 
@@ -87,7 +86,6 @@ const checkInput = (input) => {
   } else if (!replaceNumber) {
     appendInput(input);
   }
-
   currentNumber = inputNumberField.innerText;
 };
 
@@ -140,7 +138,7 @@ const calculate = () => {
 
 const updateDisplay = (input) => {
   if (input.toString().length >= 16) {
-    inputNumberField.innerText = parseFloat(input).toFixed(8);
+    inputNumberField.innerText = parseFloat(input).toPrecision(2)
   } else {
     inputNumberField.innerText = input;
   }
@@ -204,7 +202,7 @@ const calcDivision = (num1, num2) => {
   if (num2 === 0) {
     return num1;
   }
-  
+
   return parseFloat(num1) / parseFloat(num2);
 };
 
