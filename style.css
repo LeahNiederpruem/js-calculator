@@ -80,6 +80,10 @@
   transition: all 0.06s;
 }
 
+.calcButton::before {
+  content: attr(data-number);
+}
+
 .calcButton:hover {
   transition: all 0.1s;
   background: hsl(0, 0%, 90%);
