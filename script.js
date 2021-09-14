@@ -18,6 +18,7 @@ let replaceNumber = true;
 document.body.onkeydown = (e) => {
   switch (e.key.toLowerCase()) {
     case "enter":
+      e.preventDefault();
       calculate();
       break;
     case "backspace":
@@ -138,7 +139,7 @@ const calculate = () => {
 
 const updateDisplay = (input) => {
   if (input.toString().length >= 16) {
-    inputNumberField.innerText = parseFloat(input).toPrecision(2)
+    inputNumberField.innerText = parseFloat(input).toPrecision(2);
   } else {
     inputNumberField.innerText = input;
   }
