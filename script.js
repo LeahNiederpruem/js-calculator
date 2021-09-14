@@ -54,6 +54,7 @@ document.body.onkeydown = (e) => {
 };
 
 numberButtons.forEach((button) => {
+  button.innerText = button.dataset.number
   button.onclick = () => {
     checkInput(button.innerText);
   };
@@ -139,7 +140,7 @@ const calculate = () => {
 
 const updateDisplay = (input) => {
   if (input.toString().length >= 16) {
-    inputNumberField.innerText = parseFloat(input).toFixed(14);
+    inputNumberField.innerText = parseFloat(input).toFixed(8);
   } else {
     inputNumberField.innerText = input;
   }
@@ -200,6 +201,10 @@ const calcMultiplication = (num1, num2) => {
 };
 
 const calcDivision = (num1, num2) => {
+  if (num2 === 0) {
+    return num1;
+  }
+  
   return parseFloat(num1) / parseFloat(num2);
 };
 
