@@ -6,10 +6,6 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-body {
-  background-color: white;
-}
-
 .mainWrapper {
   height: 100vh;
   display: flex;
